@@ -24,8 +24,7 @@ public class CallReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		final String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);      
 		final String incomingNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-		
-		if (TelephonyManager.EXTRA_STATE_RINGING.equals(state)) {       		
+		if (TelephonyManager.EXTRA_STATE_RINGING.equals(state) && incomingNumber != null) {       		
 			Log.d(TAG, incomingNumber);
 			if ( !doesContactExist(incomingNumber)) {
 				new Handler().postDelayed(new Runnable() {
