@@ -42,7 +42,7 @@ public class CallReceiver extends BroadcastReceiver {
 //						browserIntent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 						App.getContext().startActivity(browserIntent);
 					}
-			 	}, 1000);
+			 	}, 2000);
 			}
 		}
 	}
