@@ -24,7 +24,7 @@ public class CallReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		final String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);      
 		final String incomingNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-		if (TelephonyManager.EXTRA_STATE_RINGING.equals(state) && incomingNumber != null) {       		
+		if (TelephonyManager.EXTRA_STATE_RINGING.equals(state) && incomingNumber != null && !"".equals(incomingNumber)) {       		
 			onRinging(incomingNumber);
 		}
 		else {
@@ -32,7 +32,7 @@ public class CallReceiver extends BroadcastReceiver {
 			telephonyManager.listen(new PhoneStateListener() {
 	            public void onCallStateChanged(int state, String incomingNumber) {
 	                super.onCallStateChanged(state, incomingNumber);
-	                if (incomingNumber != null && state == TelephonyManager.CALL_STATE_RINGING) {
+	                if (state == TelephonyManager.CALL_STATE_RINGING && incomingNumber != null && !"".equals(incomingNumber)) {
 	                	onRinging(incomingNumber);
 	                }
 	            }
