@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vyhladávání Neznámých Čísel</string>
+    <string name="menu_settings">Nastavení</string>
+    <string name="information">Když začne zvonit neznámý číslo, aplikace automaticky otevří prohlížeč s Google výsledkami pro toto číslo.</string>
+    <string name="optional_settings">Volitelná nastavení</string>
+    <string name="search_string_suffix">Další klíčová slova</string>
+</resources>
