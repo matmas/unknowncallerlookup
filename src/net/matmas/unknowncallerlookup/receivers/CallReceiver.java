@@ -15,32 +15,46 @@ import android.provider.BaseColumns;
 import android.provider.ContactsContract;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 public class CallReceiver extends BroadcastReceiver {
 
-//	private static String TAG = CallReceiver.class.toString();
+	private static String TAG = CallReceiver.class.toString();
+	private static long last = 0;
+	private static long interval = 1000;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		final String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);      
 		final String incomingNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-		if (TelephonyManager.EXTRA_STATE_RINGING.equals(state) && incomingNumber != null && !"".equals(incomingNumber)) {       		
-			onRinging(incomingNumber);
+		if (TelephonyManager.EXTRA_STATE_RINGING.equals(state) && incomingNumber != null && !"".equals(incomingNumber)) {
+			Log.d(TAG, "extra state ringing");
+			onRingingOnce(incomingNumber);
 		}
 		else {
 			TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 			telephonyManager.listen(new PhoneStateListener() {
 	            public void onCallStateChanged(int state, String incomingNumber) {
 	                super.onCallStateChanged(state, incomingNumber);
+	                Log.d(TAG, "on call state changed");
 	                if (state == TelephonyManager.CALL_STATE_RINGING && incomingNumber != null && !"".equals(incomingNumber)) {
-	                	onRinging(incomingNumber);
+                		onRingingOnce(incomingNumber);
 	                }
 	            }
 	        }, PhoneStateListener.LISTEN_CALL_STATE);
 		}
 	}
 	
+	private void onRingingOnce(String incomingNumber) {
+		Log.d(TAG, "on ringing once");
+		if (last + interval < System.currentTimeMillis() || last > System.currentTimeMillis()) { // system time may be changed 
+			onRinging(incomingNumber);
+			last = System.currentTimeMillis();
+		}
+	}
+	
 	private void onRinging(final String incomingNumber) {
+		Log.d(TAG, "on ringing");
     	if ( !doesContactExist(incomingNumber)) {
 			new Handler().postDelayed(new Runnable() {
 				@SuppressWarnings("deprecation")
@@ -52,6 +66,7 @@ public class CallReceiver extends BroadcastReceiver {
 					}
 					Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URL));
 					browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // because we are not calling it from an activity
+					Log.d(TAG, "starting activity");
 					App.getContext().startActivity(browserIntent);
 				}
 		 	}, 1000);
