@@ -4,6 +4,7 @@ import java.net.URLEncoder;
 
 import net.matmas.unknowncallerlookup.App;
 import net.matmas.unknowncallerlookup.MainActivity;
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -17,6 +18,7 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+@SuppressLint("DefaultLocale")
 public class CallReceiver extends BroadcastReceiver {
 
 	private static String TAG = CallReceiver.class.toString();
@@ -27,7 +29,7 @@ public class CallReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		final String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);      
 		final String incomingNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-		if (TelephonyManager.EXTRA_STATE_RINGING.equals(state) && incomingNumber != null && !"".equals(incomingNumber)) {
+		if (TelephonyManager.EXTRA_STATE_RINGING.equals(state) && isPhoneNumber(incomingNumber)) {
 			Log.d(TAG, "extra state ringing");
 			onRingingOnce(incomingNumber);
 		}
@@ -37,12 +39,28 @@ public class CallReceiver extends BroadcastReceiver {
 	            public void onCallStateChanged(int state, String incomingNumber) {
 	                super.onCallStateChanged(state, incomingNumber);
 	                Log.d(TAG, "on call state changed");
-	                if (state == TelephonyManager.CALL_STATE_RINGING && incomingNumber != null && !"".equals(incomingNumber)) {
+	                if (state == TelephonyManager.CALL_STATE_RINGING && isPhoneNumber(incomingNumber)) {
                 		onRingingOnce(incomingNumber);
 	                }
 	            }
 	        }, PhoneStateListener.LISTEN_CALL_STATE);
 		}
+	}
+	
+	private boolean isPhoneNumber(String number) {
+		if (number == null) {
+			return false;
+		}
+		if (number.equals("")) {
+			return false;
+		}
+		if (number.trim().toLowerCase().equals("unknown")) {
+			return false;
+		}
+		if (number.matches(".*\\d.*")) {
+			return true;
+		}
+		return false;
 	}
 	
 	private void onRingingOnce(String incomingNumber) {
