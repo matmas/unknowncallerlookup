@@ -77,11 +77,14 @@ public class CallReceiver extends BroadcastReceiver {
 			new Handler().postDelayed(new Runnable() {
 				@SuppressWarnings("deprecation")
 				public void run() {
-					String URL = "https://www.google.com/search?q=" + URLEncoder.encode(incomingNumber);
-					String suffix = MainActivity.loadSearchSuffix();
+					String prefix = MainActivity.load(MainActivity.URL_PREFIX);
+					String suffix = MainActivity.load(MainActivity.SEARCH_SUFFIX);
+					
+					String URL = prefix + URLEncoder.encode(incomingNumber);
 					if ( !suffix.equals("")) {
 						URL += URLEncoder.encode(" " + suffix);
 					}
+					
 					Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URL));
 					browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // because we are not calling it from an activity
 					Log.d(TAG, "starting activity");

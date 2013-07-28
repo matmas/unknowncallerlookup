@@ -5,4 +5,5 @@
     <string name="information">Když začne zvonit neznámý číslo, aplikace automaticky otevří prohlížeč s Google výsledkami pro toto číslo.</string>
     <string name="optional_settings">Volitelná nastavení</string>
     <string name="search_string_suffix">Další klíčová slova</string>
+    <string name="url_prefix">URL prefix</string>
 </resources>

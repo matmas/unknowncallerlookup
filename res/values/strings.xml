@@ -5,4 +5,5 @@
     <string name="information">When an unknown number is ringing, Google search results for this number will open in a web browser automatically.</string>
     <string name="optional_settings">Optional settings</string>
     <string name="search_string_suffix">Additional search keywords</string>
+    <string name="url_prefix">URL prefix</string>
 </resources>

@@ -5,4 +5,5 @@
     <string name="information">Wenn eine unbekannte Nummer anruft, werden die Google Suchergebnisse für diese Nummer in einem Web-Browser automatisch geöffnet.</string>
     <string name="optional_settings">Optionale Einstellungen</string>
     <string name="search_string_suffix">Zusätzliche Suchbegriffe</string>
+    <string name="url_prefix">URL prefix</string>
 </resources>
