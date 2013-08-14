@@ -3,7 +3,8 @@ package net.matmas.unknowncallerlookup.receivers;
 import java.net.URLEncoder;
 
 import net.matmas.unknowncallerlookup.App;
-import net.matmas.unknowncallerlookup.MainActivity;
+import net.matmas.unknowncallerlookup.fields.SearchSuffix;
+import net.matmas.unknowncallerlookup.fields.UrlPrefix;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -77,8 +78,8 @@ public class CallReceiver extends BroadcastReceiver {
 			new Handler().postDelayed(new Runnable() {
 				@SuppressWarnings("deprecation")
 				public void run() {
-					String prefix = MainActivity.load(MainActivity.URL_PREFIX);
-					String suffix = MainActivity.load(MainActivity.SEARCH_SUFFIX);
+					String prefix = new UrlPrefix().loadValidOrDefault(); // in case people managed to save invalid data using previous version of this app
+					String suffix = new SearchSuffix().loadValidOrDefault();
 					
 					String URL = prefix + URLEncoder.encode(incomingNumber);
 					if ( !suffix.equals("")) {
