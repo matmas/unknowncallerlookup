@@ -27,12 +27,14 @@ public class MainActivity extends Activity {
 		
 		for (final String key : fields.keySet()) {
 			int id = fields.get(key);
-			final EditText searchSuffix = (EditText) findViewById(id);
+			final EditText editText = (EditText) findViewById(id);
 			
-			searchSuffix.setText(load(key));
-			searchSuffix.addTextChangedListener(new TextWatcher() {
-				public void onTextChanged(CharSequence searchPattern, int arg1, int arg2, int arg3) {
-					save(key, searchPattern.toString());
+			editText.setText(load(key)); // load
+			save(key, editText.getText().toString()); // save and trigger validation
+			
+			editText.addTextChangedListener(new TextWatcher() { // monitor changes
+				public void onTextChanged(CharSequence text, int arg1, int arg2, int arg3) {
+					save(key, text.toString());
 				}
 				public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
 				}
@@ -58,6 +60,16 @@ public class MainActivity extends Activity {
 	}
 	
 	private void save(String what, String value) {
+		if (what.equals(URL_PREFIX)) {
+			EditText urlPrefix = (EditText) findViewById(R.id.url_prefix);
+			if (value.startsWith("http://") || value.startsWith("https://")) {
+				urlPrefix.setError(null); // okay
+			}
+			else {
+				urlPrefix.setError(getString(R.string.url_prefix_must_be_url));
+				return;
+			}
+		}
 		getPreferences().edit().putString(what, value).commit();
 	}
 	

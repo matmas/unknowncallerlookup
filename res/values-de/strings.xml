@@ -6,4 +6,5 @@
     <string name="optional_settings">Optionale Einstellungen</string>
     <string name="search_string_suffix">Zusätzliche Suchbegriffe</string>
     <string name="url_prefix">URL prefix</string>
+    <string name="url_prefix_must_be_url">URL prefix muss mit http:// oder https:// beginnen</string>
 </resources>

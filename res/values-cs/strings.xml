@@ -6,4 +6,5 @@
     <string name="optional_settings">Volitelná nastavení</string>
     <string name="search_string_suffix">Další klíčová slova</string>
     <string name="url_prefix">URL prefix</string>
+    <string name="url_prefix_must_be_url">URL prefix musí začínat s http:// nebo https://</string>
 </resources>
