@@ -5,6 +5,12 @@
     <string name="information">Wenn eine unbekannte Nummer anruft, werden die Google Suchergebnisse für diese Nummer in einem Web-Browser automatisch geöffnet.</string>
     <string name="optional_settings">Optionale Einstellungen</string>
     <string name="search_string_suffix">Zusätzliche Suchbegriffe</string>
-    <string name="url_prefix">URL prefix</string>
-    <string name="url_prefix_must_be_url">URL prefix muss mit http:// oder https:// beginnen</string>
+    <string name="url_prefix">Suchmaschine</string>
+    <string name="url_prefix_must_be_url">Suchmaschine muss mit http:// oder https:// beginnen</string>
+    <string name="number_format">Format von Telefonnummern ohne Landesvorwahl</string>
+    <string-array name="number_format_choices" xmlns:tools="http://schemas.android.com/tools" tools:ignore="TypographyDashes">
+        <item>0123456789</item>
+        <item>012-345-6789</item>
+        <item>012-345678</item>
+    </string-array>
 </resources>

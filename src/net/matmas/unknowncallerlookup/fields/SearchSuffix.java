@@ -18,15 +18,4 @@ public class SearchSuffix extends Field {
 	public String getDefaultValue() {
 		return "";
 	}
-
-	@Override
-	public boolean validate(String value) {
-		return true; // any string will do
-	}
-
-	@Override
-	public String getValidationFailedMessage() {
-		return ""; // we don't have any
-	}
-
 }

@@ -12,6 +12,7 @@ public class Fields {
 			fields = new LinkedList<Field>();
 			fields.add(new SearchSuffix());
 			fields.add(new UrlPrefix());
+			fields.add(new NumberFormat());
 		}
 		return fields;
 	}

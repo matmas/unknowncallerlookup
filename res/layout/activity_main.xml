@@ -1,9 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent" android:layout_height="fill_parent">
 
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity" >
+    
     <TextView
         android:id="@+id/app_description"
         android:layout_width="wrap_content"
@@ -17,23 +19,23 @@
     
     <TextView
         android:id="@+id/url_prefix_label"
+        android:layout_below="@+id/app_description"
         style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/app_description"
         android:layout_marginTop="20dp"
         android:text="@string/url_prefix"
         android:textAppearance="?android:attr/textAppearanceSmall" />
     
     <EditText
         android:id="@+id/url_prefix"
+        android:layout_below="@+id/url_prefix_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/app_description"
         android:layout_alignRight="@+id/app_description"
-        android:layout_below="@+id/url_prefix_label"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="@string/url_prefix"
@@ -41,28 +43,50 @@
     
     <TextView
         android:id="@+id/optional_settings"
+        android:layout_below="@+id/url_prefix"
         style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/url_prefix"
         android:layout_marginTop="20dp"
         android:text="@string/optional_settings"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <EditText
         android:id="@+id/search_suffix"
+        android:layout_below="@+id/optional_settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/app_description"
         android:layout_alignRight="@+id/app_description"
-        android:layout_below="@+id/optional_settings"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="@string/search_string_suffix"
         android:inputType="text|textNoSuggestions" />
+
+    <TextView
+        android:id="@+id/number_format_label"
+        android:layout_below="@+id/search_suffix"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/number_format"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
     
-    
+    <Spinner
+        android:id="@+id/number_format"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/app_description"
+        android:layout_alignRight="@+id/app_description"
+        android:layout_below="@+id/number_format_label"
+        android:layout_marginTop="20dp"
+        android:entries="@array/number_format_choices" />
 
 </RelativeLayout>
+
+</ScrollView>

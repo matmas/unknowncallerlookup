@@ -4,10 +4,7 @@ import net.matmas.unknowncallerlookup.fields.Field;
 import net.matmas.unknowncallerlookup.fields.Fields;
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
-import android.widget.EditText;
 
 public class MainActivity extends Activity {
 
@@ -17,20 +14,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		for (final Field field : Fields.getAll()) {
-			final EditText editText = (EditText) findViewById(field.getId());
-			
-			editText.setText(field.load()); // load
-			field.save(editText.getText().toString(), editText); // save and trigger validation
-			
-			editText.addTextChangedListener(new TextWatcher() { // monitor changes
-				public void onTextChanged(CharSequence text, int arg1, int arg2, int arg3) {
-					field.save(text.toString(), editText);
-				}
-				public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-				}
-				public void afterTextChanged(Editable arg0) {
-				}
-			});
+			field.initActivity(this);
 		}
 	}
 

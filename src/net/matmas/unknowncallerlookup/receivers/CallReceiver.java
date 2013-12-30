@@ -3,6 +3,7 @@ package net.matmas.unknowncallerlookup.receivers;
 import java.net.URLEncoder;
 
 import net.matmas.unknowncallerlookup.App;
+import net.matmas.unknowncallerlookup.fields.NumberFormat;
 import net.matmas.unknowncallerlookup.fields.SearchSuffix;
 import net.matmas.unknowncallerlookup.fields.UrlPrefix;
 import android.annotation.SuppressLint;
@@ -15,6 +16,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.provider.BaseColumns;
 import android.provider.ContactsContract;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -72,6 +74,28 @@ public class CallReceiver extends BroadcastReceiver {
 		}
 	}
 	
+	private String formatNumberIfNeeded(String number) {
+		String numberFormat = new NumberFormat().loadValidOrDefault();
+		if (numberFormat.equals(NumberFormat.RAW)) {
+			return number;
+		}
+		else if (numberFormat.equals(NumberFormat.FORMATTED)) {
+			return PhoneNumberUtils.formatNumber(number);
+		}
+		else if (numberFormat.equals(NumberFormat.FORMATTED_REDUCED)) {
+			number = PhoneNumberUtils.formatNumber(number);
+			if (!number.startsWith("+") && !number.startsWith("00")) {
+				int firstDashIndex = number.indexOf("-");
+				number = PhoneNumberUtils.stripSeparators(number);
+				if (firstDashIndex != -1) {
+					number = number.substring(0, firstDashIndex) + "-" + number.substring(firstDashIndex, number.length());
+				}
+			}
+			return number;
+		}
+		return number;
+	}
+	
 	private void onRinging(final String incomingNumber) {
 		Log.d(TAG, "on ringing");
     	if ( !doesContactExist(incomingNumber)) {
@@ -81,7 +105,7 @@ public class CallReceiver extends BroadcastReceiver {
 					String prefix = new UrlPrefix().loadValidOrDefault(); // in case people managed to save invalid data using previous version of this app
 					String suffix = new SearchSuffix().loadValidOrDefault();
 					
-					String URL = prefix + URLEncoder.encode(incomingNumber);
+					String URL = prefix + URLEncoder.encode(formatNumberIfNeeded(incomingNumber));
 					if ( !suffix.equals("")) {
 						URL += URLEncoder.encode(" " + suffix);
 					}
