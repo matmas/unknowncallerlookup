@@ -8,7 +8,7 @@
     <string name="optional_settings">Optional settings</string>
     <string name="search_string_suffix">Additional search keywords</string>
     <string name="number_format">Format of numbers without country code</string>
-    <string-array name="number_format_choices" xmlns:tools="http://schemas.android.com/tools" tools:ignore="TypographyDashes">
+    <string-array name="number_format_choices">
         <item>0123456789</item>
         <item>012-345-6789</item>
         <item>012-345678</item>

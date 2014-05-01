@@ -8,7 +8,7 @@
     <string name="url_prefix">Suchmaschine</string>
     <string name="url_prefix_must_be_url">Suchmaschine muss mit http:// oder https:// beginnen</string>
     <string name="number_format">Format von Telefonnummern ohne Landesvorwahl</string>
-    <string-array name="number_format_choices" xmlns:tools="http://schemas.android.com/tools" tools:ignore="TypographyDashes">
+    <string-array name="number_format_choices">
         <item>0123456789</item>
         <item>012-345-6789</item>
         <item>012-345678</item>
