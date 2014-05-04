@@ -87,6 +87,26 @@
         android:layout_marginTop="20dp"
         android:entries="@array/number_format_choices" />
 
+    <!--<TextView-->
+        <!--android:id="@+id/test_label"-->
+        <!--android:layout_below="@+id/number_format"-->
+        <!--style="?android:attr/listSeparatorTextViewStyle"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:text="test"-->
+        <!--android:textAppearance="?android:attr/textAppearanceSmall" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/test"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/test_label"-->
+        <!--android:text="test browser"-->
+        <!--android:layout_marginTop="20dp" />-->
+
 </RelativeLayout>
 
 </ScrollView>

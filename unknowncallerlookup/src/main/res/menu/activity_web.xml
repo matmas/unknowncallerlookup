@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!--<item-->
+        <!--android:id="@+id/menu_pickup"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:showAsAction="always"-->
+        <!--android:icon="@drawable/pickup"-->
+        <!--android:title="Accept"/>-->
+
+    <!--<item-->
+        <!--android:id="@+id/menu_hangup"-->
+        <!--android:orderInCategory="200"-->
+        <!--android:showAsAction="always"-->
+        <!--android:title="Hangup"-->
+        <!--android:icon="@drawable/hangup"-->
+        <!--/>-->
+</menu>

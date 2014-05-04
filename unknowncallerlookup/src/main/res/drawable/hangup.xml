@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/hangup">
+        <rotate
+            android:drawable="@android:drawable/ic_menu_call"
+            android:fromDegrees="45"
+            />
+    </item>
+
+</layer-list>
