@@ -19,7 +19,7 @@ public class RingingHandler {
     private static final long TIMEOUT = 5000;
 
     public static void onRinging(final Context context, final String incomingNumber) {
-    	if ( !Utils.doesContactExist(incomingNumber)) {
+        if ( !Utils.doesContactExist(incomingNumber)) {
 
             new Handler() {
                 String currentTopActivityName = "";
