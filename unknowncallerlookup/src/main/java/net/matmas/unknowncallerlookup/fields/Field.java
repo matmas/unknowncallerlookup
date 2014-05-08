@@ -61,10 +61,9 @@ public abstract class Field {
 		editText.setText(this.load()); // load
 		this.save(editText.getText().toString(), editText); // save and trigger validation
 		
-		final Field this_ = this;
 		editText.addTextChangedListener(new TextWatcher() { // monitor changes
 			public void onTextChanged(CharSequence text, int arg1, int arg2, int arg3) {
-				this_.save(text.toString(), editText);
+				Field.this.save(text.toString(), editText);
 			}
 			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
 			}
