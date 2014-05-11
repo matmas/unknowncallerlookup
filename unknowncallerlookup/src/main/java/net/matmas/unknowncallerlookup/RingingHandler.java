@@ -14,50 +14,25 @@ import java.util.List;
  */
 public class RingingHandler {
 
-    private static final int MSG_ID_CHECK_TOP_ACTIVITY = 1;
-    private static final long DELAY_INTERVAL = 100;
-    private static final long TIMEOUT = 5000;
-
     public static void onRinging(final Context context, final String incomingNumber) {
         if ( !Utils.doesContactExist(incomingNumber)) {
-
-            new Handler() {
-                String currentTopActivityName = "";
-                long started = 0;
+            Utils.monitorTopActivity(new Utils.TopActivityHandler() {
+                @Override
+                public boolean onTopActivityChanged(String topActivityClassName) {
+                    Log.i("top activity changed", topActivityClassName);
+                    if (topActivityClassName.equals("com.android.incallui.InCallActivity")) {
+                        openBrowserInSec(context, incomingNumber);
+                        return true;
+                    }
+                    return false;
+                }
 
                 @Override
-                public void handleMessage(Message msg) {
-                    if (msg.what == MSG_ID_CHECK_TOP_ACTIVITY) {
-
-                        if (started == 0) {
-                            started = System.currentTimeMillis();
-                        }
-
-                        ActivityManager activityManager = (ActivityManager) App.getContext().getSystemService(Context.ACTIVITY_SERVICE);
-
-                        List<ActivityManager.RunningTaskInfo> tasks = activityManager.getRunningTasks(1);
-                        String topActivityName = tasks.get(0).topActivity.getClassName();
-
-                        // currentTopActivityName might be null
-                        if ( !topActivityName.equals(currentTopActivityName)) {
-                            currentTopActivityName = topActivityName;
-
-                            if (currentTopActivityName.equals("com.android.incallui.InCallActivity")) {
-                                openBrowserInSec(context, incomingNumber);
-                                return;
-                            }
-                        }
-
-                        if (System.currentTimeMillis() - started > TIMEOUT) {
-                            // Timeout occurred
-                            openBrowserInSec(context, incomingNumber);
-                            return;
-                        }
-
-                        this.sendEmptyMessageDelayed(MSG_ID_CHECK_TOP_ACTIVITY, DELAY_INTERVAL);
-                    }
+                public void onTimeout() {
+                    Log.i("top activity", "timeout");
+                    openBrowserInSec(context, incomingNumber);
                 }
-            }.sendEmptyMessage(MSG_ID_CHECK_TOP_ACTIVITY);
+            }, 5000);
 		}
     }
 
@@ -81,6 +56,5 @@ public class RingingHandler {
 
         context.startActivity(intent);
     }
-
 
 }

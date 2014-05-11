@@ -1,9 +1,13 @@
 package net.matmas.unknowncallerlookup;
 
+import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.BaseColumns;
 import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
@@ -14,6 +18,7 @@ import net.matmas.unknowncallerlookup.fields.UrlPrefix;
 
 import java.lang.reflect.Method;
 import java.net.URLEncoder;
+import java.util.List;
 
 /**
  * Created by matmas on 5/4/14.
@@ -86,6 +91,56 @@ public class Utils {
             URL += URLEncoder.encode(" " + suffix);
         }
         return URL;
+    }
+
+    public interface TopActivityHandler {
+        public boolean onTopActivityChanged(String topActivityClassName);
+        public void onTimeout();
+    }
+
+    public static void monitorTopActivity(final TopActivityHandler topActivityHandler, final long timeoutMillis) {
+        final int MSG_ID_CHECK_TOP_ACTIVITY = 1;
+        final long DELAY_INTERVAL = 100;
+
+        new Handler() {
+            String currentTopActivityName = "";
+            long started = 0;
+
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == MSG_ID_CHECK_TOP_ACTIVITY) {
+
+                    if (started == 0) {
+                        started = System.currentTimeMillis();
+                    }
+
+                    String topActivityName = getTopActivityClassName();
+
+                    // currentTopActivityName might be null
+                    if ( !topActivityName.equals(currentTopActivityName)) {
+                        currentTopActivityName = topActivityName;
+
+                        if (topActivityHandler.onTopActivityChanged(currentTopActivityName)) {
+                            return;
+                        }
+                    }
+
+                    if (System.currentTimeMillis() - started > timeoutMillis) {
+                        // Timeout occurred
+                        topActivityHandler.onTimeout();
+                        return;
+                    }
+
+                    this.sendEmptyMessageDelayed(MSG_ID_CHECK_TOP_ACTIVITY, DELAY_INTERVAL);
+                }
+            }
+        }.sendEmptyMessage(MSG_ID_CHECK_TOP_ACTIVITY);
+    }
+
+    private static String getTopActivityClassName() {
+        ActivityManager activityManager = (ActivityManager) App.getContext().getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> tasks = activityManager.getRunningTasks(1);
+        return tasks.get(0).topActivity.getClassName();
     }
 
 //    public static void expandNotificationPanel() {
