@@ -7,15 +7,15 @@
         <style type="text/css">
             .wrapper {
                 position: relative;
-/*                 width: 1024px; */
-/*                 height: 500px; */
-                width: 180px;
-                height: 120px;
+                width: 1024px;
+                height: 500px;
+/*                width: 180px;
+                height: 120px;*/
                 border: 1px solid black;
                 
 /*                 color: white; */
-                text-shadow: 0 0 10px black;
-                background: url(feature-graphics-background1.png);
+                text-shadow: 0 0 40px black;
+                background: url(feature-graphics-bg.png);
             }
             
             .inner {
@@ -28,7 +28,9 @@
                 height: 100%;
                 
                 
-                font-size: 130%;
+                font-size: 600%;
+                line-height: 100%;
+
                 font-family: 'Marko One', serif;
                 
                 
@@ -48,6 +50,7 @@
                 height: 0;
             }
             .text2 {
+                text-shadow: 0 0 40px green;
                 color: green;
                 height: 0;
                 margin-top: 3em;
