@@ -14,4 +14,12 @@
         <!--android:title="Hangup"-->
         <!--android:icon="@drawable/hangup"-->
         <!--/>-->
+
+    <item
+        android:id="@+id/menu_close"
+        android:orderInCategory="200"
+        android:showAsAction="always"
+        android:title="Close"
+        android:icon="@drawable/abc_ic_clear"
+        />
 </menu>
