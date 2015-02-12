@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/UnknownCallerLookup.iml" filepath="$PROJECT_DIR$/UnknownCallerLookup.iml" />
-      <module fileurl="file://$PROJECT_DIR$/unknowncallerlookup/unknowncallerlookup.iml" filepath="$PROJECT_DIR$/unknowncallerlookup/unknowncallerlookup.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/unknowncallerlookup.iml" filepath="$PROJECT_DIR$/unknowncallerlookup.iml" />
     </modules>
   </component>
 </project>

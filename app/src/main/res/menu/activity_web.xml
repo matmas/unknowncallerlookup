@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_close"
+        android:orderInCategory="200"
+        app:showAsAction="always"
+        android:title="Close"
+        android:icon="@drawable/abc_ic_clear_mtrl_alpha"
+        />
+</menu>
